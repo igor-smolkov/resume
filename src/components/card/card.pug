@@ -1,3 +1,9 @@
-mixin card
-  +b.ARTICLE.card_frontside
-    span Визитка: контактная информация
+mixin card(side)
+  if (side !== 'backside')
+    +b.ARTICLE.card_frontside
+      +b.SECTION.person
+        +e.H1.name Игорь Смольков
+        +e.profession фронтэндер
+  else
+    +b.ARTICLE.card_backside
+      span Визитка: профессиональные навыки
