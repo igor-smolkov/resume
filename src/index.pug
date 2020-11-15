@@ -1,12 +1,13 @@
 extends layout
 
+include components/card/card.pug
+
 block variables
   - var title = 'РЕЗЮМЕ'
   - var descr = 'Игорь Смольков - фронтэндер'
 
 block content
-    article.card.card_frontside
-      span Визитка: контактная информация
+    +card
     article.card.card_backside
       span Визитка: профессиональные навыки
     article.background

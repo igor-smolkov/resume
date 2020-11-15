@@ -169,6 +169,10 @@ module.exports = {
             {
                 test: /\.pug$/,
                 loader: 'pug-loader'
+            },
+            {
+                test: /\.pug$/,
+                loader: 'pug-html-loader'
             }
         ]
     }
