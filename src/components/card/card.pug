@@ -1,9 +1,53 @@
-mixin card(side)
-  if (side !== 'backside')
+mixin card(props)
+  - var resume = props.info
+  - var sources = props.files
+  - var backside = props.backside
+
+  //- Лицевая сторона визитки
+  if (!backside)
     +b.ARTICLE.card_frontside
+      //- Имя
       +b.SECTION.person
-        +e.H1.name Игорь Смольков
-        +e.profession фронтэндер
+        +e.H1.name= `${resume.firstname} ${resume.lastname}`
+        +e.P.profession= resume.profession
+        //- Коротко о себе
+        +e.P.about-msg= resume.short
+        //- Аватарка
+        +e.avatar
+          +b.avatar
+            +e.photo(src=sources.avatar)
+      //- Список котнтактов
+      +b.UL.contact-list
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.email
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.phone
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.telegramm
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.github
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.location
+      //- Языки
+      +b.UL.lang-list
+        each lang in resume.language
+          +e.LI.language= lang
+
+  //- Задняя сторона визитки
   else
     +b.ARTICLE.card_backside
-      span Визитка: профессиональные навыки
+      //- Профессиональные навыки
+      +b.SECTION.skills
+        +b.UL.skill-list
+          each skill in resume.skills
+            +e.LI.skill= skill
+      //- Технологии
+      +b.SECTION.techs
+        +b.UL.tech-list
+          each tech in resume.techs
+            +e.LI.tech= tech.name

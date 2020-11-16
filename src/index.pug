@@ -5,10 +5,214 @@ include components/card/card.pug
 block variables
   - var title = 'РЕЗЮМЕ'
   - var descr = 'Игорь Смольков - фронтэндер'
+  -
+    var resume = {
+      "firstname": "Игорь",
+      "lastname": "Смольков",
+      "middlename": "Олегович",
+      "birthday": "05.04.1996",
+      "location": "Томск",
+      "profession": "фронтэндер",
+      
+      "email": "smolkov.igor@gmail.com",
+      "phone": "+7-983-211-06-01",
+      "telegramm": "telegramm",
+      "github": "github",
+      
+      "experience": "Без опыта комерческой разработки",
+      "language": [ "русский", "английский" ],
+      "skills": [
+        "Отзывчивая верстка (responsitive)",
+        "Адаптивная верстка (adaptive)",
+        "Кроссбраузерность",
+        "Компонетная разработка",
+        "Unit-тестирование",
+        "БЭМ стандарты (BEM)",
+        "Контроль версиий",
+        "Рефакторинг",
+        "Минификация",
+        "Модульность"
+      ],
+      "techs": [
+        { 
+          "name": "HTML", 
+          "v": "5", 
+          "desc": "язык гипертекстовой разметки" 
+        },
+        { 
+          "name": "CSS", 
+          "v": "3", 
+          "desc": "язык разметки стилей" 
+        },
+        { 
+          "name": "JavaScript", 
+          "v": "ES6", 
+          "names": [ "JavaScript", "JScript", "JS" ],
+          "desc": "язык программирования"
+        },
+        { 
+          "name": "React", 
+          "desc": "js фреймворк" 
+        },
+        { 
+          "name": "Git", 
+          "desc": "система контроля версий" 
+        },
+        { 
+          "name": "SCSS", 
+          "names":[ "SCSS", "SASS" ], 
+          "desc": "препроцессор css" 
+        },
+        { 
+          "name": "jQuery", 
+          "desc": "js библиотека" 
+        },
+        { 
+          "name": "JSON", 
+          "desc": "формат данных" 
+        },
+        { 
+          "name": "Pug", 
+          "names": [ "Pug", "Jade" ], 
+          "desc": "препроцессор html" 
+        },
+        { 
+          "name": "Jest", 
+          "desc": "тестирование" 
+        },
+        { 
+          "name": "npm", 
+          "desc": "пакетный менеджер" 
+        },
+        { 
+          "name": "VSCode", 
+          "names": [ "VSCode", "visual studio code" ], 
+          "desc": "IDE" 
+        },
+        { 
+          "name": "JSX", 
+          "desc": "синтаксис" 
+        },
+        { 
+          "name": "AJAX"
+        }
+      ],
+      
+      "short": "быстро учусь, заинтересован в прокачивании навыков на реальных проектах",
+      "long": "писал и играл электронную музыку, организовывал концерты, выставки современного искусства, хеппенинги, перформансы, семинары, арт-пространства, поддерживал и создавал различные самоорганизации и горизонтальные инициативы, выступал как художник, виджей, диджей, музыкант",
+      
+      "edu": {
+        "courses": [
+          {
+            "year": 2019,
+            "name": "HTML Academy",
+            "details": "полный курс HTML, CSS, JS",
+            "link": "ссылка"
+          },
+          {
+            "year": 2020,
+            "name": "образовательная программа FullStackDevelopment",
+            "link": "ссылка"
+          }
+        ],
+        "universities": [
+          {
+            "year": 2018,
+            "name": "Томский Университет Систем Управления и Радиоэлетроники",
+            "location": "Томск",
+            "qualification": "инженер промышленной электроники",
+            "gradwork": {
+              "name": "Подсистема инвентаризации в ТО ФГС Кемеровостат",
+              "stack": [ 
+                "Java", "XML", "UML", "SQLite", "AndroidStudio", "Firebird", "IBExpert" 
+              ]
+            },
+            "projects": [
+              {
+                "name": "Автоматизированный комплекс выращивания растений",
+                "stack": [
+                  "STM32", "C", "Keil", "Sprint-Layout", "Blender"
+                ]
+              }
+            ]
+          }
+        ],
+        "schools": [
+          {
+            "year": 2014,
+            "name": "Городской Классический Лицей",
+            "location": "Кемерово",
+            "profile": "информационные технологии",
+            "projects": [
+              {
+                "name": "SPA для составления макета сайта",
+                "stack": [
+                  "HTML", "CSS", "JavaScript", "JQuery", "AJAX", "PHP", "MySQL"
+                ],
+                "prizewinner": true
+              },
+              {
+                "name": "Генератор музыкальных идей",
+                "stack": [ "Delphi 7" ],
+                "prizewinner": true
+              }
+            ]
+          },
+          {
+            "year": 2010,
+            "name": "Гимназия №17",
+            "location": "Кемерово",
+            "profile": "экономика",
+            "projects": [
+              {
+                "name": "Программа для подбора конфигурации компьютера",
+                "stack": [ "VisualBasic" ],
+                "prizewinner": true
+              },
+              {
+                "name": "Программа для перевода единиц измерения",
+                "stack": [ "QBasic" ],
+                "prizewinner": true
+              }
+            ]
+          }
+        ],
+        "projects": [
+          {
+            "year": 2012,
+            "name": "Трассировщик лучей",
+            "stack": [
+              "C++", "Microsoft Visual Studio 2010", "Git"
+            ],
+            "presentation": "конференция ЛШЮП"
+          },
+          {
+            "year": 2011,
+            "name": "Интернет-ТВ",
+            "stack": [
+              "JavaScript", "HTML", "CSS", "C#", "Говорилка", "FL Studio"
+            ],
+            "presentation": "конференция ЛШЮП"
+          },
+          {
+            "year": 2010,
+            "name": "Web-портал на самописной CMS",
+            "stack": [
+              "HTML", "CSS", "PHP", "MySQL"
+            ],
+            "presentation": "конференция ЛШИП"
+          }
+        ]
+      }
+    }
+  -
+    var sources = {
+      "avatar": "./images/me.jpg"
+    }
 
 block content
-    +card('frontside')
-    +card('backside')
+    +card({ info: resume, files: sources })
+    +card({ info: resume, backside: true })
     article.background
       span Образование и проекты
     article.underground

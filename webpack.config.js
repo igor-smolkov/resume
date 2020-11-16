@@ -70,9 +70,9 @@ const plugins = () => {
     const list = [
         toHTMLPage(baseTemplate, outputHTML),
         new CleanWebpackPlugin(),
-        // new CopyWebpackPlugin({
-        //     patterns: [ { from: path.resolve(__dirname, `src/${imagesDir}/`), to: imagesDir } ]
-        // }),
+        new CopyWebpackPlugin({
+            patterns: [ { from: path.resolve(__dirname, `src/${imagesDir}/`), to: imagesDir } ]
+        }),
         // new webpack.ProvidePlugin({
         //     $: 'jquery',
         //     jQuery: 'jquery',
@@ -118,7 +118,8 @@ module.exports = {
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src'), //алиас на папку исходников
-            // '@comp': path.resolve(__dirname, 'src/components'), //алиас на компоненты
+            '@comp': path.resolve(__dirname, 'src/components'), //алиас на компоненты
+            '@data': path.resolve(__dirname, 'src/data')
         }
     },
     optimization: optimization(),
