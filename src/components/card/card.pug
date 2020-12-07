@@ -6,34 +6,28 @@ mixin card(props)
   //- Лицевая сторона визитки
   if (!backside)
     +b.ARTICLE.card_frontside
-      //- Имя
+      +b.avatar
+        +e.photo(src=sources.avatar)
+      +b.P.about-msg= resume.short
       +b.SECTION.person
         +e.H1.name= `${resume.firstname} ${resume.lastname}`
         +e.P.profession= resume.profession
-        //- Коротко о себе
-        +e.P.about-msg= resume.short
-        //- Аватарка
-        +e.avatar
-          +b.avatar
-            +e.photo(src=sources.avatar)
-      //- Список котнтактов
       +b.UL.contact-list
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.email
-        +e.LI.item
-          +b.contact
-            +e.A.link(href='#')= resume.phone
-        +e.LI.item
-          +b.contact
-            +e.A.link(href='#')= resume.telegramm
+            +e.A.link(href='#')= resume.location
         +e.LI.item
           +b.contact
             +e.A.link(href='#')= resume.github
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.location
-      //- Языки
+            +e.A.link(href='#')= resume.telegramm
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.phone
+        +e.LI.item
+          +b.contact
+            +e.A.link(href='#')= resume.email
       +b.UL.lang-list
         each lang in resume.language
           +e.LI.language= lang
