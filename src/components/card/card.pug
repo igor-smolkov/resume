@@ -37,11 +37,13 @@ mixin card(props)
     +b.ARTICLE.card_backside
       //- Профессиональные навыки
       +b.SECTION.skills
+        +e.H2.title= 'Навыки:'
         +b.UL.skill-list
           each skill in resume.skills
             +e.LI.skill= skill
       //- Технологии
       +b.SECTION.techs
+        +e.H2.title= 'Технологии:'
         +b.UL.tech-list
           each tech in resume.techs
             +e.LI.tech= tech.name
