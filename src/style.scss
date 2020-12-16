@@ -7,7 +7,7 @@
 
 p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 18px;
 }
 h1 {
@@ -23,10 +23,19 @@ h2 {
     line-height: 30px;
     text-transform: uppercase;
 }
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+}
+
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 12px;
     line-height: 14px;
+
+    background-color: rgb(158, 172, 158);
 
     display: flex;
     flex-direction: column;

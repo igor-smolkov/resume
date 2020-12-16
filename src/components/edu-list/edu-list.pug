@@ -1,0 +1,42 @@
+mixin edu-block(content, h4)
+  +b.SECTION.edu-block
+    if (content.name)
+      if (h4)
+        +e.H4.title= content.name
+      else
+        +e.H3.title= content.name
+    if (content.year)
+      +e.P.year= content.year
+    if (content.details)
+      +e.P.details= content.details
+    if (content.link)
+      +e.P.link= content.link
+    if (content.qualification)
+      +e.P.qualification= content.qualification
+    if (content.projects)
+      +e.blocks
+        if (content.gradwork)
+          +edu-block(content.gradwork, true)
+        each block in content.projects
+          +edu-block(block, true)
+    if (content.location)
+      +e.P.location= content.location
+
+mixin edu-list(props)
+  - var eduInfo = props.info
+
+  +b.ARTICLE.edu-list
+    +e.SECTION.courses
+      +e.H2.title= 'Курсы'
+      +e.blocks
+        each block in eduInfo.courses
+          +edu-block(block)
+    +e.SECTION.universities
+      +e.H2.title= 'Высшее образование'
+      +e.blocks
+        each block in eduInfo.universities
+          +edu-block(block)
+    +e.SECTION.schools
+      +e.H2.title= 'Среднее образование'
+    +e.SECTION.projects
+      +e.H2.title= 'Проекты'

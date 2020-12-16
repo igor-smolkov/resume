@@ -1,6 +1,7 @@
 extends layout
 
 include components/card/card.pug
+include components/edu-list/edu-list.pug
 
 block variables
   - var title = 'РЕЗЮМЕ'
@@ -104,14 +105,14 @@ block variables
       "edu": {
         "courses": [
           {
-            "year": 2019,
-            "name": "HTML Academy",
-            "details": "полный курс HTML, CSS, JS",
+            "year": 2020,
+            "name": "Образовательная программа FullStackDevelopment",
             "link": "ссылка"
           },
           {
-            "year": 2020,
-            "name": "образовательная программа FullStackDevelopment",
+            "year": 2019,
+            "name": "HTML Academy",
+            "details": "Полный курс HTML, CSS, JS",
             "link": "ссылка"
           }
         ],
@@ -120,7 +121,7 @@ block variables
             "year": 2018,
             "name": "Томский Университет Систем Управления и Радиоэлетроники",
             "location": "Томск",
-            "qualification": "инженер промышленной электроники",
+            "qualification": "Инженер промышленной электроники",
             "gradwork": {
               "name": "Подсистема инвентаризации в ТО ФГС Кемеровостат",
               "stack": [ 
@@ -213,6 +214,7 @@ block variables
 block content
     +card({ info: resume, files: sources })
     +card({ info: resume, backside: true })
+    +edu-list({ info: resume.edu })
     //- article.background
     //-   span Образование и проекты
     //- article.underground
