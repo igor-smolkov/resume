@@ -123,6 +123,7 @@ block variables
             "location": "Томск",
             "qualification": "Инженер промышленной электроники",
             "gradwork": {
+              "description": "Выпускная квалификационная работа",
               "name": "Подсистема инвентаризации в ТО ФГС Кемеровостат",
               "stack": [ 
                 "Java", "XML", "UML", "SQLite", "AndroidStudio", "Firebird", "IBExpert" 
@@ -130,6 +131,7 @@ block variables
             },
             "projects": [
               {
+                "description": "Ежегодная конференция факультета",
                 "name": "Автоматизированный комплекс выращивания растений",
                 "stack": [
                   "STM32", "C", "Keil", "Sprint-Layout", "Blender"
@@ -143,16 +145,18 @@ block variables
             "year": 2014,
             "name": "Городской Классический Лицей",
             "location": "Кемерово",
-            "profile": "информационные технологии",
+            "profile": "Информационные технологии",
             "projects": [
               {
+                "description": "Лауреат лицейской конференции, 2012",
                 "name": "SPA для составления макета сайта",
                 "stack": [
-                  "HTML", "CSS", "JavaScript", "JQuery", "AJAX", "PHP", "MySQL"
+                  "HTML", "CSS", "JavaScript", "jQuery", "AJAX", "PHP", "MySQL"
                 ],
                 "prizewinner": true
               },
               {
+                "description": "Лауреат лицейской конференции, 2013",
                 "name": "Генератор музыкальных идей",
                 "stack": [ "Delphi 7" ],
                 "prizewinner": true
@@ -163,14 +167,16 @@ block variables
             "year": 2010,
             "name": "Гимназия №17",
             "location": "Кемерово",
-            "profile": "экономика",
+            "profile": "Экономика",
             "projects": [
               {
+                "description": "Лауреат городской конференции, 2009",
                 "name": "Программа для подбора конфигурации компьютера",
                 "stack": [ "VisualBasic" ],
                 "prizewinner": true
               },
               {
+                "description": "Лауреат школьной конференции, 2007",
                 "name": "Программа для перевода единиц измерения",
                 "stack": [ "QBasic" ],
                 "prizewinner": true
@@ -180,28 +186,28 @@ block variables
         ],
         "projects": [
           {
+            "description": "Конференция ЛШЮП, Новосибирск",
             "year": 2012,
             "name": "Трассировщик лучей",
             "stack": [
               "C++", "Microsoft Visual Studio 2010", "Git"
-            ],
-            "presentation": "конференция ЛШЮП"
+            ]
           },
           {
+            "description": "Конференция ЛШЮП, Новосибирск",
             "year": 2011,
             "name": "Интернет-ТВ",
             "stack": [
               "JavaScript", "HTML", "CSS", "C#", "Говорилка", "FL Studio"
-            ],
-            "presentation": "конференция ЛШЮП"
+            ]
           },
           {
+            "description": "Конференция ЛШИП, Новосибирск",
             "year": 2010,
             "name": "Web-портал на самописной CMS",
             "stack": [
               "HTML", "CSS", "PHP", "MySQL"
-            ],
-            "presentation": "конференция ЛШИП"
+            ]
           }
         ]
       }
@@ -215,7 +221,5 @@ block content
     +card({ info: resume, files: sources })
     +card({ info: resume, backside: true })
     +edu-list({ info: resume.edu })
-    //- article.background
-    //-   span Образование и проекты
-    //- article.underground
-    //-   span Интересы и прочая деятельность
+    article.underground
+      span Интересы и прочая деятельность

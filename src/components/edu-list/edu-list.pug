@@ -1,3 +1,8 @@
+mixin stack(list)
+  +b.UL.stack-list
+    each tech in list
+      +e.LI.tech= tech
+
 mixin edu-block(content, h4)
   +b.SECTION.edu-block
     if (content.name)
@@ -13,14 +18,20 @@ mixin edu-block(content, h4)
       +e.P.link= content.link
     if (content.qualification)
       +e.P.qualification= content.qualification
+    if (content.profile)
+      +e.P.profile= content.profile
     if (content.projects)
       +e.blocks
         if (content.gradwork)
           +edu-block(content.gradwork, true)
         each block in content.projects
           +edu-block(block, true)
+    if (content.stack)
+      +stack(content.stack)
     if (content.location)
       +e.P.location= content.location
+    if (content.description)
+      +e.P.description= content.description
 
 mixin edu-list(props)
   - var eduInfo = props.info
@@ -38,5 +49,11 @@ mixin edu-list(props)
           +edu-block(block)
     +e.SECTION.schools
       +e.H2.title= 'Среднее образование'
+      +e.blocks
+        each block in eduInfo.schools
+          +edu-block(block)
     +e.SECTION.projects
       +e.H2.title= 'Проекты'
+      +e.blocks
+        each block in eduInfo.projects
+          +edu-block(block)
