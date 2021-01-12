@@ -1,0 +1,30 @@
+.additional-info {
+    margin-top: 30px;
+    padding: 25px;
+    padding-bottom: 50px;
+
+    max-width: 600px;
+    width: 100%;
+
+    background-color: white;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+
+    &__content {
+        text-align: justify;
+    }
+    &__extra-ref {
+        margin-top: 50px;
+        width: 100%;
+        position: relative;
+        &::before{
+            content: '';
+            display: block;
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: darkcyan;
+        }
+    }
+}

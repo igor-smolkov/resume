@@ -1,0 +1,8 @@
+mixin additional-info(props)
+  - var info = props.info
+
+  +b.ARTICLE.additional-info
+    +e.H2.title= 'Также о себе'
+    +e.content= info
+    +e.extra-ref
+        +b.A.link(href='change/link')= 'ссылка на резюме'

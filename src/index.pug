@@ -2,6 +2,7 @@ extends layout
 
 include components/card/card.pug
 include components/edu-list/edu-list.pug
+include components/additional-info/additional-info.pug
 
 block variables
   - var title = 'РЕЗЮМЕ'
@@ -221,5 +222,4 @@ block content
     +card({ info: resume, files: sources })
     +card({ info: resume, backside: true })
     +edu-list({ info: resume.edu })
-    article.underground
-      span Интересы и прочая деятельность
+    +additional-info({ info: resume.long })
