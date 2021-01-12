@@ -48,9 +48,9 @@
         line-height: 14px;
         text-align: right;
         
-        border: 1px solid lightgray;
+        border: 1px solid #c5cfc0;
         border-top-right-radius: 25px;
-        border-left: 7px solid lightseagreen;
+        border-left: 7px solid #99b4a4;
     
         background-color: white;
     
@@ -99,7 +99,7 @@
             width: 14px;
             height: 14px;
             border-radius: 7px;
-            border: 1px solid blue;
+            border: 1px solid #99b4a4;
         }
     }
     .lang-list {
@@ -149,7 +149,9 @@
             font-size: 12px;
             line-height: 18px;
             padding: 3px 0;
-            border-bottom: 1px solid rgba(0, 139, 139, 0.301);
+            // border-bottom: 1px solid rgba(0, 139, 139, 0.301);
+            border-bottom: 1px solid #c5cfc0;
+
         }
     }
     .tech-list {
@@ -165,7 +167,7 @@
             margin: 2px;
             font-size: 16px;
             line-height: 16px;
-            border: 1px solid rgba(0, 139, 139, 0.301);
+            border: 1px solid #c5cfc0;
             border-radius: 10px;
         }
     }
