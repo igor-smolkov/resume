@@ -52,6 +52,7 @@ const cssLoaders = extra => {
         {
             loader: MiniCssExtractPlugin.loader,
             options: {
+                publicPath: '',
                 hmr: isDev,
                 reloadAll: true
             }

@@ -83,6 +83,26 @@
         &__item {
             margin-right: 8px;
             margin-top: 8px;
+            &:nth-child(1) ::before {
+                background: no-repeat center url('./home.png');
+                background-size: 90%;
+            }
+            &:nth-child(2) ::before {
+                background: no-repeat center url('./github.png');
+                background-size: 90%;
+            }
+            &:nth-child(3) ::before {
+                background: no-repeat center url('./telegram.png');
+                background-size: 90%;
+            }
+            &:nth-child(4) ::before {
+                background: no-repeat center url('./phone.png');
+                background-size: 90%;
+            }
+            &:nth-child(5) ::before {
+                background: no-repeat center url('./email.png');
+                background-size: 90%;
+            }
         }
     } 
     .contact {
@@ -96,11 +116,11 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 7px;
-            border: 1px solid #99b4a4;
+            width: 16px;
+            height: 16px;
+            opacity: 0.9;
         }
+        
     }
     .lang-list {
         position: absolute;
