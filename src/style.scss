@@ -50,3 +50,17 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+a {
+    color: #486b57;
+    padding-bottom: 3px;
+    border-bottom: 0.1px dashed #c5cfc0;
+    &:active,
+    &:visited {
+        color: #486b57;
+    }
+    &:hover {
+        color: #6d977e;
+        border: none;
+    }
+}
