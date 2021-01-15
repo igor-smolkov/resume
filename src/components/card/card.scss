@@ -128,29 +128,45 @@
     }
     .lang-list {
         position: absolute;
-        top: 0;
+        top: 5px;
         right: 10px;
         display: flex;
         flex-direction: column;
         z-index: 1;
         &__language {
-            margin-top: 10px;
-            padding-right: 30px;
+            margin-top: 5px;
             position: relative;
-
-            font-size: 0;
-            &::after{
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 24px;
-                border-top: 4px solid white;
-                border-bottom: 4px solid rgb(167, 0, 0);
-                height: 14px;
-                background-color: rgb(0, 0, 161);
+            border-radius: 4px;
+            border: 2px solid #C98C8C;
+            color: #C98C8C;
+            background-color: white;
+            padding: 1px 5px;
+            user-select: none; 
+            &:last-child {
+                border-color: #607C8C;
+                color: #607C8C;
             }
+            // &:hover::after {
+            //     content: 'Читаю документацию на русском';
+            //     display: block;
+            //     position: absolute;
+            //     width: 100px;
+            //     min-height: 10px;
+            //     z-index: 1;
+            // }
+            // font-size: 0;
+            // &::after{
+            //     content: '';
+            //     display: block;
+            //     position: absolute;
+            //     top: 0;
+            //     right: 0;
+            //     width: 24px;
+            //     border-top: 4px solid white;
+            //     border-bottom: 4px solid rgb(167, 0, 0);
+            //     height: 14px;
+            //     background-color: rgb(0, 0, 161);
+            // }
         }
     }
 
@@ -198,6 +214,18 @@
 
     
     transform: rotate(-2deg);
+}
+
+.copy-message {
+    position: fixed;
+    top: 40%;
+    padding: 30px;
+    // width: 300px;
+    // height: 50px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid #99b4a4;
+    border-radius: 20px;
+    background-color: #f5f7f1;
 }
 
 @media only screen and (max-width : 440px) {

@@ -15,22 +15,28 @@ mixin card(props)
       +b.UL.contact-list
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.location
+            +e.A.link(href=resume.location.link title='Фактический адрес в 2gis' target='_blank')= resume.location.name
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.github
+            +e.A.link(href=resume.github.link title='Мои репозитори на github' target='_blank')= resume.github.name
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.telegramm
+            +e.A.link(href=resume.telegramm.link title='Пишите мне в телеграм' target='_blank')= resume.telegramm.name
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.phone
+            +e.A.link(href='copy/' title='Звонить с 9:00 до 21:00 GMT+7')= resume.phone
         +e.LI.item
           +b.contact
-            +e.A.link(href='#')= resume.email
+            +e.A.link(href='copy/' title='Периодически проверяю ;)')= resume.email
       +b.UL.lang-list
         each lang in resume.language
-          +e.LI.language= lang
+          case lang
+            when 'RU'
+              +e.LI.language(title='Читаю документацию на русском')= lang
+            when 'EN'
+              +e.LI.language(title='Читаю документацию на английском')= lang
+            default
+              +e.LI.language(title='Читаю документацию на этом языке')= lang
 
   //- Задняя сторона визитки
   else
