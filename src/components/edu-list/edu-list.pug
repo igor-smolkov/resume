@@ -14,8 +14,6 @@ mixin edu-block(content, h4)
       +e.P.year= content.year
     if (content.details)
       +e.P.details= content.details
-    if (content.link)
-      +e.P.link= content.link
     if (content.qualification)
       +e.P.qualification= content.qualification
     if (content.profile)
@@ -28,6 +26,8 @@ mixin edu-block(content, h4)
           +edu-block(block, true)
     if (content.stack)
       +stack(content.stack)
+    if (content.link)
+      +e.A.link(href=content.link.url)= content.link.description
     if (content.location)
       +e.P.location= content.location
     if (content.description)

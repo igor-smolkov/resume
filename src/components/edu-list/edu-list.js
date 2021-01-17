@@ -1,6 +1,6 @@
 import './edu-list.scss'
 
-const importantStack = ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'SCSS', 'jQuery', 'JSON', 'Pug', 'Jest', 'npm', 'VSCode', 'JSX', 'AJAX'];
+const importantStack = ['HTML', 'CSS', 'JavaScript', 'React', 'Git', 'SCSS', 'jQuery', 'JSON', 'Pug', 'Jest', 'npm', 'VSCode', 'JSX', 'AJAX', 'TypeScript', 'Webpack', 'Less', 'SVG'];
 const usefulStack = ['XML', 'UML', 'PHP', 'MySQL', 'C#'];
 
 export default function() {

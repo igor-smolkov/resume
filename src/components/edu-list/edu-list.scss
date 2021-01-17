@@ -33,6 +33,7 @@
     max-width: 100%;
     min-width: 240px;
     width: fit-content;
+    max-height: 100%;
     min-height: 78px;
     height: 100%;
 
@@ -47,11 +48,16 @@
         font-size: 12px;
         color: rgb(85, 85, 85);
     }
+    &__details {
+        text-align: justify;
+    }
+    &__link {
+        text-align: center;
+    }
     &__location {
         text-align: right;
     }
     &__description {
-        margin-top: 5px;
         margin-right: 2px;
         text-align: right;
     }
@@ -73,6 +79,7 @@
 }
 
 .stack-list {
+    margin-bottom: 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

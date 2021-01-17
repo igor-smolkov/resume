@@ -54,10 +54,12 @@ body {
 a {
     color: #486b57;
     padding-bottom: 3px;
-    border-bottom: 0.1px dashed #c5cfc0;
+    text-decoration: underline dashed #c5cfc0;
+    // border-bottom: 0.1px dashed #c5cfc0;
     &:active,
     &:visited {
         color: #486b57;
+        text-decoration: underline dashed #c5cfc0;
     }
     &:hover {
         color: #6d977e;
