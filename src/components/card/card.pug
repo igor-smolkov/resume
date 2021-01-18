@@ -52,4 +52,4 @@ mixin card(props)
         +e.H2.title= 'Технологии:'
         +b.UL.tech-list
           each tech in resume.techs
-            +e.LI.tech= tech.name
+            +e.LI.tech(title=`${tech.desc ? tech.desc : ''}${tech.v ? ' / Версия: '+tech.v : ''}`)= tech.name
