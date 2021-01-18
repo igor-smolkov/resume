@@ -65,4 +65,12 @@ a {
         color: #6d977e;
         border: none;
     }
+    &.underline-none {
+        text-decoration: none;
+        &:active,
+        &:visited,
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }

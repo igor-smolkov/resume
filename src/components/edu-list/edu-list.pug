@@ -27,7 +27,9 @@ mixin edu-block(content, h4)
     if (content.stack)
       +stack(content.stack)
     if (content.link)
-      +e.A.link(href=content.link.url)= content.link.description
+      +e.link
+        A.underline-none(href=content.link.url)= content.link.description
+        SPAN= content.link.url
     if (content.location)
       +e.P.location= content.location
     if (content.description)
