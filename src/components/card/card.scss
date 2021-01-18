@@ -18,9 +18,16 @@
     padding: 10px;
 
     animation: card-rotate 1.5s ease-in-out;
+    
+    position: relative;
+    &_dragged {
+        position: absolute;
+        z-index: 1000;
+    }
+
+    touch-action: none;
 }
 .card_frontside {
-    position: relative;
     flex-direction: column;
 
     .avatar {
@@ -211,7 +218,6 @@
             border-radius: 10px;
         }
     }
-
     
     transform: rotate(-2deg);
 }
