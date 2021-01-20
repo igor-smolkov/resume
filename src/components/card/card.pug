@@ -4,8 +4,8 @@ mixin card(props)
   - var backside = props.backside
 
   //- Лицевая сторона визитки
-  if (!backside)
-    +b.ARTICLE.card_frontside
+  ARTICLE.card
+    .card__frontside(class=`${backside ? 'card__frontside_none': ''}`)
       +b.avatar
         +e.photo(src=sources.avatar)
       +b.P.about-msg= resume.short
@@ -37,10 +37,10 @@ mixin card(props)
               +e.LI.language(title='Читаю документацию на английском')= lang
             default
               +e.LI.language(title='Читаю документацию на этом языке')= lang
+      +b.drag-field(title='Потяните, чтобы переместить визитку')
 
-  //- Задняя сторона визитки
-  else
-    +b.ARTICLE.card_backside
+    //- Задняя сторона визитки
+    .card__backside(class=`${!backside ? 'card__backside_none': ''}`)
       //- Профессиональные навыки
       +b.SECTION.skills
         +e.H2.title= 'Навыки:'
@@ -53,3 +53,4 @@ mixin card(props)
         +b.UL.tech-list
           each tech in resume.techs
             +e.LI.tech(title=`${tech.desc ? tech.desc : ''}${tech.v ? ' / Версия: '+tech.v : ''}`)= tech.name
+      +b.drag-field(title='Потяните, чтобы переместить визитку')

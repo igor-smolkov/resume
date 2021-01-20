@@ -7,6 +7,20 @@
 
     margin: 40px;
     margin-bottom: 0;
+
+    position: relative;
+    &_dragged {
+        position: absolute;
+        z-index: 10;
+    }
+    cursor: pointer;
+}
+
+.card__frontside,
+.card__backside {
+    width: 100%;
+    height: 100%;
+    
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
     background-color: white;
 
@@ -17,20 +31,29 @@
     
     padding: 10px;
 
-    animation: card-rotate 1.5s ease-in-out;
-    
-    position: relative;
-    &_dragged {
+    &_none {
+        display: none;
+    }
+    .drag-field {
         position: absolute;
-        z-index: 1000;
+        bottom: 0;
+        right: 0;
+        width: 35px;
+        height: 35px;
+        border-top-left-radius: 35px;
+        border: 2px dashed #c5cfc0;
+        border-bottom: none;
+        border-right: none;
+        cursor: grab;
     }
 
     touch-action: none;
 }
-.card_frontside {
+.card__frontside {
     flex-direction: column;
 
     .avatar {
+        cursor: auto; 
         border-bottom-left-radius: 100%;
         overflow: hidden;
         position: absolute;
@@ -45,7 +68,9 @@
             width: 250%;
         }
     }    
-    .about-msg {    
+    .about-msg {
+        cursor: auto;    
+        
         align-self: flex-end;
     
         margin-right: 150px;
@@ -65,6 +90,7 @@
         z-index: 1;
     }
     .person {
+        cursor: auto; 
         // border: 1px solid blue;
         align-self: center;
         margin-right: 240px;
@@ -82,6 +108,7 @@
         }
     }
     .contact-list {
+        cursor: auto; 
         margin-bottom: 10px;
         display: flex;
         align-self: center;
@@ -113,6 +140,10 @@
         }
     } 
     .contact {
+        a[href="copy/"] {
+            cursor: copy; 
+        }
+        cursor: auto; 
         position: relative;
         padding-left: 20px;
             
@@ -134,6 +165,7 @@
         
     }
     .lang-list {
+        cursor: help; 
         position: absolute;
         top: 5px;
         right: 10px;
@@ -153,35 +185,15 @@
                 border-color: #607C8C;
                 color: #607C8C;
             }
-            // &:hover::after {
-            //     content: 'Читаю документацию на русском';
-            //     display: block;
-            //     position: absolute;
-            //     width: 100px;
-            //     min-height: 10px;
-            //     z-index: 1;
-            // }
-            // font-size: 0;
-            // &::after{
-            //     content: '';
-            //     display: block;
-            //     position: absolute;
-            //     top: 0;
-            //     right: 0;
-            //     width: 24px;
-            //     border-top: 4px solid white;
-            //     border-bottom: 4px solid rgb(167, 0, 0);
-            //     height: 14px;
-            //     background-color: rgb(0, 0, 161);
-            // }
         }
     }
 
-    transform: rotate(2deg);
+    // transform: rotate(2deg);
+    animation: card-rotate-left 1.5s ease-in-out;
 }
-.card_backside {
+.card__backside {
     .techs,
-    .skills {
+    .skills { 
         width: 50%;
         padding: 10px;
         
@@ -190,6 +202,7 @@
         flex-direction: column;
     }
     .skill-list {
+        cursor: auto;
         display: flex;
         flex-direction: column;
         &__skill {
@@ -202,12 +215,14 @@
         }
     }
     .tech-list {
+        cursor: auto;
         flex-grow: 1;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-around;
         &__tech {
+            cursor: help;
             align-self: center;
             max-height: 32px;
             padding: 6px;
@@ -219,7 +234,8 @@
         }
     }
     
-    transform: rotate(-2deg);
+    // transform: rotate(-2deg);
+    animation: card-rotate-right 1.5s ease-in-out;
 }
 
 .copy-message {
@@ -232,10 +248,18 @@
     border: 1px solid #99b4a4;
     border-radius: 20px;
     background-color: #f5f7f1;
+    z-index: 1000;
+}
+
+body.grabbing {
+    cursor: grabbing;
+    .card .drag-field {
+        cursor: grabbing;
+    }
 }
 
 @media only screen and (max-width : 440px) {
-    .card_frontside {
+    .card__frontside {
         .person {
             order: 3;
             margin-right: 0;
@@ -255,8 +279,13 @@
     }
 }
 
-@keyframes card-rotate {
+@keyframes card-rotate-left {
     from {
-        transform: rotate(0deg);
+        transform: rotate(2deg);
+    }
+}
+@keyframes card-rotate-right {
+    from {
+        transform: rotate(-2deg);
     }
 }
