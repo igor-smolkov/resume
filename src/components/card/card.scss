@@ -13,7 +13,7 @@
         position: absolute;
         z-index: 10;
     }
-    cursor: pointer;
+    cursor: move;
 }
 
 .card__frontside,
@@ -189,7 +189,14 @@
     }
 
     // transform: rotate(2deg);
-    animation: card-rotate-left 1.5s ease-in-out;
+    &_animation {
+        &_rotate {
+            animation: card-rotate-left 1.5s ease-in-out;
+        }
+        &_scale {
+            animation: card-scale 0.5s ease-in-out;
+        }
+    }
 }
 .card__backside {
     .techs,
@@ -235,7 +242,14 @@
     }
     
     // transform: rotate(-2deg);
-    animation: card-rotate-right 1.5s ease-in-out;
+    &_animation {
+        &_rotate {
+            animation: card-rotate-right 1.5s ease-in-out;
+        }
+        &_scale {
+            animation: card-scale 0.5s ease-in-out;
+        }
+    }
 }
 
 .copy-message {
@@ -287,5 +301,11 @@ body.grabbing {
 @keyframes card-rotate-right {
     from {
         transform: rotate(-2deg);
+    }
+}
+@keyframes card-scale {
+    50% {
+        transform: scale(0.8);
+        filter: blur(1px);
     }
 }
