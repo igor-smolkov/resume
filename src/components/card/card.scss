@@ -13,7 +13,6 @@
         position: absolute;
         z-index: 10;
     }
-    cursor: move;
 }
 
 .card__frontside,
@@ -38,20 +37,29 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 35px;
-        height: 35px;
-        border-top-left-radius: 35px;
-        border: 2px dashed #c5cfc0;
+        width: 12px;
+        height: 100%;
+        border-left: 2px dashed #e0e9de;
         border-bottom: none;
         border-right: none;
         cursor: grab;
+        z-index: 0;
+    }
+    .flip-field {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 6px;
+        width: 100%;
+        border-top: 2px dashed #e0e9de;
+        cursor: ns-resize;
+        z-index: 0;
     }
 
     touch-action: none;
 }
 .card__frontside {
     flex-direction: column;
-
     .avatar {
         cursor: auto; 
         border-bottom-left-radius: 100%;
@@ -61,6 +69,7 @@
         height: 270px;
         top: 0;
         right: 0;
+        z-index: 1;
         &__photo {
             position: absolute;
             top: -55%;

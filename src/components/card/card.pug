@@ -37,6 +37,7 @@ mixin card(props)
               +e.LI.language(title='Читаю документацию на английском')= lang
             default
               +e.LI.language(title='Читаю документацию на этом языке')= lang
+      +b.flip-field(title='Потяните, чтобы перевернуть визитку')
       +b.drag-field(title='Потяните, чтобы переместить визитку')
 
     //- Задняя сторона визитки
@@ -53,4 +54,5 @@ mixin card(props)
         +b.UL.tech-list
           each tech in resume.techs
             +e.LI.tech(title=`${tech.desc ? tech.desc : ''}${tech.v ? ' / Версия: '+tech.v : ''}`)= tech.name
+      +b.flip-field(title='Потяните, чтобы перевернуть визитку')
       +b.drag-field(title='Потяните, чтобы переместить визитку')
