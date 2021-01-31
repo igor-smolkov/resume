@@ -76,3 +76,21 @@ a {
         }
     }
 }
+
+.card-zone {
+    margin: 40px;
+    margin-bottom: 0;
+    max-width: 600px;
+    max-height: 333px;
+    min-height: 333px;
+    width: 100%;
+    height: 100%;
+    // border: 1px solid red;
+    &_abandoned {
+        border: 1px dashed rgb(58, 58, 58);
+    }
+    &_aimed {
+        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.9);
+        transition: all 0.2s ease;
+    }
+}

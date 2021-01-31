@@ -5,8 +5,15 @@ export default class Card {
         this.elementCard = element;
         this.elementCardFrontside = this.elementCard.querySelector('.card__frontside');
         this.elementCardBackside = this.elementCard.querySelector('.card__backside');
+        this.elementCardZone = this.elementCard.closest('.card-zone');
+        // if (this.elementCardZone !== null) {
+        //     this.elementCardZone.style.borderColor = 'blue';
+        // }
 
         this.draggingElementCard = null;
+        this.draggingCursorShiftX = null;
+        this.draggingCursorShiftY = null;
+        this.isDraggingEnterZone = false;
         this.isFlipping = false;
 
         this.elementCardFrontside.querySelectorAll('a[href="copy/"').forEach(elementContactToCopy => {
@@ -16,22 +23,36 @@ export default class Card {
         this.elementCard.addEventListener('pointerdown', (e)=>{this.onCardPointerDown(e)});
         this.elementCard.addEventListener('pointerup', (e)=>{this.onCardPointerUp(e)});
 
+        this.elementCard.addEventListener('dragstart', (e)=>{this.onCardDragStart(e)});
+
+        this.elementCardZone.addEventListener('dragenter', (e)=>{this.onCardZoneDragEnter(e)});
+        this.elementCardZone.addEventListener('dragleave', (e)=>{this.onCardZoneDragLeave(e)});
+        this.elementCardZone.addEventListener('dragover', (e)=>{this.onCardZoneDragOver(e)});
+        this.elementCardZone.addEventListener('drop', (e)=>{this.onCardZoneDrop(e)});
+
         document.addEventListener('pointermove', (e)=>{this.onDocPointerMove(e)});
         document.addEventListener('pointerup', (e)=>{this.onDocPointerUp(e)});
+
+        document.addEventListener('dragover', (e)=>{this.onDocDragOver(e)}, true);
+        document.addEventListener('drop', (e)=>{this.onDocDrop(e)}, true);
     }
     onCardPointerDown(e) {
-        if (e.target.classList.contains('drag-field')) {
-            this.draggingElementCard = e.target.closest('.card');
-            if (this.draggingElementCard !== null) {
-                this.draggingElementCard.dataset.shiftX = e.clientX - this.draggingElementCard.getBoundingClientRect().left +34;
-                this.draggingElementCard.dataset.shiftY = e.clientY - this.draggingElementCard.getBoundingClientRect().top +30;
-                this.draggingElementCard.classList.add('card_dragged');
-                this.draggingElementCard.style.zIndex += 2;
-                document.body.classList.add('grabbing');
-                this.draggingElementCard.style.left = e.pageX - this.draggingElementCard.dataset.shiftX-6 + 'px';
-                this.draggingElementCard.style.top = e.pageY - this.draggingElementCard.dataset.shiftY-10 + 'px';
-                window.getSelection().removeAllRanges();
-            }
+        if (e.target.classList.contains('drag-field') && this.draggingElementCard === null) {
+            this.draggingElementCard = this.elementCard;
+            this.draggingElementCard.setAttribute('draggable', true);
+            console.log('draggable');
+
+            // this.draggingElementCard = e.target.closest('.card');
+            // if (this.draggingElementCard !== null) {
+            //     this.draggingElementCard.dataset.shiftX = e.clientX - this.draggingElementCard.getBoundingClientRect().left; //+34;
+            //     this.draggingElementCard.dataset.shiftY = e.clientY - this.draggingElementCard.getBoundingClientRect().top; //+30;
+            //     this.draggingElementCard.classList.add('card_dragged');
+            //     this.draggingElementCard.style.zIndex += 2;
+            //     document.body.classList.add('grabbing');
+            //     this.draggingElementCard.style.left = e.pageX - this.draggingElementCard.dataset.shiftX + 'px';//-6 + 'px';
+            //     this.draggingElementCard.style.top = e.pageY - this.draggingElementCard.dataset.shiftY + 'px';//-10 + 'px';
+            //     window.getSelection().removeAllRanges();
+            // }
         } else if (e.target.classList.contains('flip-field')) {
             this.elementCardFrontside.classList.remove('card__frontside_animation_rotate');
             this.elementCardBackside.classList.remove('card__backside_animation_rotate');
@@ -49,12 +70,42 @@ export default class Card {
             this.isFlipping = false;
         }
     }
+    onCardDragStart(e) {
+        if (this.draggingElementCard === null) return;
+        this.isDraggingEnterZone = false;
+        this.draggingCursorShiftX = e.clientX - this.draggingElementCard.offsetLeft;
+        this.draggingCursorShiftY = e.clientY - this.draggingElementCard.offsetTop;
+        console.log('onCardDragStart');
+    }
+    onCardZoneDragEnter(e) {
+        if (this.draggingElementCard === null) return;
+        this.isDraggingEnterZone = true;
+        this.elementCardZone.classList.add('card-zone_aimed');
+        console.log('onCardZoneDragEnter');
+    }
+    onCardZoneDragLeave(e) {
+        if (this.draggingElementCard === null) return;
+        this.isDraggingEnterZone = false;
+        this.elementCardZone.classList.remove('card-zone_aimed');
+        console.log('onCardZoneDragLeave');
+    }
+    onCardZoneDragOver(e) {
+        if (this.draggingElementCard === null) return;
+        e.preventDefault();
+        console.log('onCardZoneDragOver');
+        this.isDraggingEnterZone = true;
+        this.elementCardZone.classList.add('card-zone_aimed');
+    }
+    onCardZoneDrop(e) {
+        this.isDraggingEnterZone = true;
+        this.onDrop(e)      
+    }
     onDocPointerMove(e) {
-        if (this.draggingElementCard !== null) {
-            this.draggingElementCard.style.left = e.pageX - this.draggingElementCard.dataset.shiftX + 'px';
-            this.draggingElementCard.style.top = e.pageY - this.draggingElementCard.dataset.shiftY + 'px';
-            window.getSelection().removeAllRanges();
-        }
+        // if (this.draggingElementCard !== null) {
+        //     this.draggingElementCard.style.left = e.pageX - this.draggingElementCard.dataset.shiftX + 'px';
+        //     this.draggingElementCard.style.top = e.pageY - this.draggingElementCard.dataset.shiftY + 'px';
+        //     window.getSelection().removeAllRanges();
+        // }
         if (this.isFlipping && (!e.target.classList.contains('flip-field') || e.pointerType !== 'mouse')) {
             this.elementCardFrontside.classList.add('card__frontside_animation_scale');
             this.elementCardBackside.classList.add('card__backside_animation_scale');
@@ -62,9 +113,38 @@ export default class Card {
         }
     }
     onDocPointerUp(e) {
-        this.draggingElementCard = null;
-        document.body.classList.remove('grabbing');
+        // this.draggingElementCard = null;
+        // document.body.classList.remove('grabbing');
         this.isFlipping = false;
+    }
+    onDocDragOver(e) {
+        if (this.draggingElementCard === null) return;
+        e.preventDefault();
+        window.getSelection().removeAllRanges();
+        console.log('onDocDragOver');
+    }
+    onDocDrop(e) {
+        this.onDrop(e)
+    }
+    onDrop(e) {
+        if (this.draggingElementCard === null) return;
+        if (!this.isDraggingEnterZone) {
+            this.draggingElementCard.classList.add('card_dragged');
+            this.draggingElementCard.style.left = e.clientX - this.draggingCursorShiftX + 'px';
+            this.draggingElementCard.style.top = e.clientY - this.draggingCursorShiftY + 'px';
+            this.elementCardZone.classList.add('card-zone_abandoned');
+        } else {
+            this.draggingElementCard.style.left = '0';
+            this.draggingElementCard.style.top = '0';
+            this.draggingElementCard.classList.remove('card_dragged');
+            this.elementCardZone.classList.remove('card-zone_abandoned');
+        }
+        this.draggingElementCard.setAttribute('draggable', false);
+        this.draggingElementCard = null;
+        console.log('onDocDrop');
+        console.log('undraggable');
+        // this.elementCardZone.style.borderColor = 'blue';
+        this.elementCardZone.classList.remove('card-zone_aimed');
     }
 
     clickToCopy(e) {
