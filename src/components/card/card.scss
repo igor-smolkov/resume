@@ -13,6 +13,24 @@
         position: absolute;
         z-index: 10;
     }
+    &_none {
+        display: none;
+    }
+    &_animation {
+        &_rotate-left {
+            animation: card-rotate-left 1.5s ease-in-out;
+        }
+        &_rotate-right {
+            animation: card-rotate-right 1.5s ease-in-out;
+        }
+        &_scale {
+            animation: card-scale 0.5s ease-in-out;
+        }
+        &_opacity {
+            opacity: 1;
+            animation: card-opacity 0.05s ease-in-out;
+        }
+    }
 }
 
 .card__frontside,
@@ -196,16 +214,6 @@
             }
         }
     }
-
-    // transform: rotate(2deg);
-    &_animation {
-        &_rotate {
-            animation: card-rotate-left 1.5s ease-in-out;
-        }
-        &_scale {
-            animation: card-scale 0.5s ease-in-out;
-        }
-    }
 }
 .card__backside {
     .techs,
@@ -247,16 +255,6 @@
             line-height: 16px;
             border: 1px solid #c5cfc0;
             border-radius: 10px;
-        }
-    }
-    
-    // transform: rotate(-2deg);
-    &_animation {
-        &_rotate {
-            animation: card-rotate-right 1.5s ease-in-out;
-        }
-        &_scale {
-            animation: card-scale 0.5s ease-in-out;
         }
     }
 }
@@ -316,5 +314,10 @@ body.grabbing {
     50% {
         transform: scale(0.8);
         filter: blur(1px);
+    }
+}
+@keyframes card-opacity {
+    from {
+        opacity: 0.7;
     }
 }

@@ -6,9 +6,6 @@ export default class Card {
         this.elementCardFrontside = this.elementCard.querySelector('.card__frontside');
         this.elementCardBackside = this.elementCard.querySelector('.card__backside');
         this.elementCardZone = this.elementCard.closest('.card-zone');
-        // if (this.elementCardZone !== null) {
-        //     this.elementCardZone.style.borderColor = 'blue';
-        // }
 
         this.draggingElementCard = null;
         this.draggingCursorShiftX = null;
@@ -37,6 +34,11 @@ export default class Card {
         document.addEventListener('drop', (e)=>{this.onDocDrop(e)}, true);
     }
     onCardPointerDown(e) {
+        this.elementCard.classList.remove('card_animation_rotate-left');
+        this.elementCard.classList.remove('card_animation_rotate-right');
+        this.elementCard.classList.remove('card_animation_opacity');
+        this.elementCard.classList.remove('card_animation_scale');
+
         if (e.target.classList.contains('drag-field') && this.draggingElementCard === null) {
             this.draggingElementCard = this.elementCard;
             this.draggingElementCard.setAttribute('draggable', true);
@@ -54,10 +56,6 @@ export default class Card {
             //     window.getSelection().removeAllRanges();
             // }
         } else if (e.target.classList.contains('flip-field')) {
-            this.elementCardFrontside.classList.remove('card__frontside_animation_rotate');
-            this.elementCardBackside.classList.remove('card__backside_animation_rotate');
-            this.elementCardFrontside.classList.remove('card__frontside_animation_scale');
-            this.elementCardBackside.classList.remove('card__backside_animation_scale');
             this.elementCardFrontside.classList.toggle('card__frontside_none');
             this.elementCardBackside.classList.toggle('card__backside_none');
             this.isFlipping = true;
@@ -107,8 +105,7 @@ export default class Card {
         //     window.getSelection().removeAllRanges();
         // }
         if (this.isFlipping && (!e.target.classList.contains('flip-field') || e.pointerType !== 'mouse')) {
-            this.elementCardFrontside.classList.add('card__frontside_animation_scale');
-            this.elementCardBackside.classList.add('card__backside_animation_scale');
+            this.elementCard.classList.add('card_animation_scale');
             this.isFlipping = false;
         }
     }
@@ -119,6 +116,8 @@ export default class Card {
     }
     onDocDragOver(e) {
         if (this.draggingElementCard === null) return;
+        this.draggingElementCard.classList.add('card_none');
+        this.elementCardZone.classList.add('card-zone_abandoned');
         e.preventDefault();
         window.getSelection().removeAllRanges();
         console.log('onDocDragOver');
@@ -128,11 +127,12 @@ export default class Card {
     }
     onDrop(e) {
         if (this.draggingElementCard === null) return;
+        this.draggingElementCard.classList.remove('card_none');
+        this.draggingElementCard.classList.add('card_animation_opacity');
         if (!this.isDraggingEnterZone) {
             this.draggingElementCard.classList.add('card_dragged');
             this.draggingElementCard.style.left = e.clientX - this.draggingCursorShiftX + 'px';
             this.draggingElementCard.style.top = e.clientY - this.draggingCursorShiftY + 'px';
-            this.elementCardZone.classList.add('card-zone_abandoned');
         } else {
             this.draggingElementCard.style.left = '0';
             this.draggingElementCard.style.top = '0';
@@ -143,7 +143,6 @@ export default class Card {
         this.draggingElementCard = null;
         console.log('onDocDrop');
         console.log('undraggable');
-        // this.elementCardZone.style.borderColor = 'blue';
         this.elementCardZone.classList.remove('card-zone_aimed');
     }
 

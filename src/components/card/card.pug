@@ -2,10 +2,11 @@ mixin card(props)
   - var resume = props.info
   - var sources = props.files
   - var backside = props.backside
+  - var rotate = props.rotate
 
   //- Лицевая сторона визитки
-  ARTICLE.card
-    .card__frontside(class=`${backside ? 'card__frontside_none': ''} card__frontside_animation_rotate`)
+  ARTICLE.card(class=`${rotate ? 'card_animation_rotate-'+rotate : ''}`)
+    .card__frontside(class=`${backside ? 'card__frontside_none': ''}`)
       +b.avatar
         +e.photo(src=sources.avatar)
       +b.P.about-msg= resume.short
@@ -41,7 +42,7 @@ mixin card(props)
       +b.drag-field(title='Потяните, чтобы переместить визитку')
 
     //- Задняя сторона визитки
-    .card__backside(class=`${!backside ? 'card__backside_none': ''} card__backside_animation_rotate`)
+    .card__backside(class=`${!backside ? 'card__backside_none': ''}`)
       //- Профессиональные навыки
       +b.SECTION.skills
         +e.H2.title= 'Навыки:'
