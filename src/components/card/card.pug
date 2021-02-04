@@ -4,8 +4,8 @@ mixin card(props)
   - var backside = props.backside
   - var rotate = props.rotate
 
-  //- Лицевая сторона визитки
   ARTICLE.card(class=`${rotate ? 'card_animation_rotate-'+rotate : ''}`)
+    //- Лицевая сторона визитки
     .card__frontside(class=`${backside ? 'card__frontside_none': ''}`)
       +b.avatar
         +e.photo(src=sources.avatar)
