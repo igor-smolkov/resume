@@ -19,6 +19,9 @@ export default class Card {
         this.elementCardFrontside.querySelectorAll('a[href="copy/"').forEach(elementContactToCopy => {
             elementContactToCopy.addEventListener('click', (e)=>{this.clickToCopy(e)});
         });
+
+        this.renderFlipBtn();
+        this.renderDragBtn();
         
         this.elementCard.addEventListener('pointerdown', (e)=>{this.onCardPointerDown(e)});
         this.elementCard.addEventListener('pointerup', this.onCardPointerUp.bind(this));
@@ -35,7 +38,41 @@ export default class Card {
 
         document.addEventListener('dragover', (e)=>{this.onDocDragOver(e)}, true);
         document.addEventListener('drop', (e)=>{this.onDocDrop(e)}, true);
+
+        window.addEventListener('resize', (e)=>this.onWinResize(e));
     }
+
+    renderFlipBtn() {
+        for(let cardSide of [this.elementCardFrontside, this.elementCardBackside]) {
+            const elemProps = new Map();
+            elemProps.set('type', 'button');
+            elemProps.set('title', 'Потяните, чтобы перевернуть визитку');
+            tools.renderElem({
+                parent: cardSide,
+                tag: 'input',
+                className: 'flip-field',
+                props: elemProps,
+            });
+        }
+    }
+    renderDragBtn() {
+        if (this.elementCard.querySelector('.drag-field')) return;
+        for(let cardSide of [this.elementCardFrontside, this.elementCardBackside]) {
+            const elemProps = new Map();
+            elemProps.set('type', 'button');
+            elemProps.set('title', 'Потяните, чтобы переместить визитку');
+            tools.renderElem({
+                parent: cardSide,
+                tag: 'input',
+                className: 'drag-field',
+                props: elemProps,
+            });
+        }
+    }
+    delDragBtn() {
+        this.elementCard.querySelectorAll('.drag-field').forEach(btnElem=>btnElem.remove());
+    }
+
     onCardPointerDown(e) {
         this.animationAllRemove();
         if (e.target.classList.contains('drag-field')) {
@@ -53,6 +90,16 @@ export default class Card {
     }
     onDocPointerUp() {
         this.flipCancel();
+    }
+
+    onWinResize(e) {
+        const [winWidth, winHeight] = [document.documentElement.clientWidth, document.documentElement.clientHeight]
+        if (winWidth <= 650) {
+            this.delDragBtn();
+        } 
+        if (winWidth > 650) {
+            this.renderDragBtn();
+        }
     }
 
     clickToCopy(e) {
@@ -220,3 +267,16 @@ export default class Card {
         this.isFlipping = false;
     }
 }
+
+const tools = {
+    renderElem: ({ parent = document, tag = 'div', className = '', props = false}) => {
+        const elem = document.createElement(tag);
+        elem.className = className;
+        if (props) {
+            for (let prop of props) {
+                elem[prop[0]] = prop[1];
+            }
+        }
+        parent.append(elem);
+    }
+};
