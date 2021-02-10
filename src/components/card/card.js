@@ -8,6 +8,9 @@ export default class Card {
 
         this.elementCardZone = zone;
 
+        this.width = 600;
+        this.height = 333;
+
         this.dragging = {
             cardElem: null,
             cursorShift: {x: null, y: null},
@@ -40,6 +43,8 @@ export default class Card {
         document.addEventListener('drop', (e)=>{this.onDocDrop(e)}, true);
 
         window.addEventListener('resize', (e)=>this.onWinResize(e));
+
+        this.refreshSizes();
     }
 
     renderFlipBtn() {
@@ -93,12 +98,22 @@ export default class Card {
     }
 
     onWinResize(e) {
+        this.refreshSizes()
+    }
+    refreshSizes() {
         const [winWidth, winHeight] = [document.documentElement.clientWidth, document.documentElement.clientHeight]
         if (winWidth <= 650) {
             this.delDragBtn();
+            this.backInZone();
         } 
         if (winWidth > 650) {
             this.renderDragBtn();
+        }
+        if (this.elementCard.offsetWidth <= 450) {
+            this.setCardFrontsideSmall();
+        }
+        if (this.elementCard.offsetWidth > 450) {
+            this.resetCardFrontsideSmall();
         }
     }
 
@@ -131,6 +146,16 @@ export default class Card {
         this.elementCard.classList.remove('card_animation_rotate-right');
         this.resetCardAnimationOpacity();
         this.resetCardAnimationScale();
+    }
+    setCardFrontsideSmall() {
+        if (!this.elementCard.classList.contains('card__frontside_small')) {
+            this.elementCard.classList.add('card__frontside_small');
+        }
+    }
+    resetCardFrontsideSmall() {
+        if (this.elementCard.classList.contains('card__frontside_small')) {
+            this.elementCard.classList.remove('card__frontside_small');
+        }
     }
     setCardDraggable() {
         this.elementCard.setAttribute('draggable', true);
@@ -178,6 +203,12 @@ export default class Card {
         this.elementCardFrontside.classList.toggle('card__frontside_none');
         this.elementCardBackside.classList.toggle('card__backside_none');
     }
+    backInZone() {
+        this.elementCard.style.left = '0';
+        this.elementCard.style.top = '0';
+        this.resetCardDragged();
+        this.resetCardZoneAbandoned();
+    }
 
     //Drag&Drop
     dragReady() {
@@ -189,8 +220,8 @@ export default class Card {
     onCardDragStart(e) {
         if (this.dragging.cardElem === null) return;
         this.dragging.isEnterZone = false;
-        this.dragging.cursorShift.x = e.clientX - this.dragging.cardElem.offsetLeft;
-        this.dragging.cursorShift.y = e.clientY - this.dragging.cardElem.offsetTop;
+        this.dragging.cursorShift.x = e.clientX - this.dragging.cardElem.offsetLeft + (this.width - this.dragging.cardElem.offsetWidth);
+        this.dragging.cursorShift.y = e.clientY - this.dragging.cardElem.offsetTop + (this.height - this.dragging.cardElem.offsetHeight);
     }
     onCardZoneDragEnter() {
         if (this.dragging.cardElem === null) return;
@@ -236,10 +267,7 @@ export default class Card {
             this.dragging.cardElem.style.left = e.clientX - this.dragging.cursorShift.x + 'px';
             this.dragging.cardElem.style.top = e.clientY - this.dragging.cursorShift.y + 'px';
         } else {
-            this.dragging.cardElem.style.left = '0';
-            this.dragging.cardElem.style.top = '0';
-            this.resetCardDragged();
-            this.resetCardZoneAbandoned();
+            this.backInZone();
         }
         this.resetCardDraggable();
         this.resetCardZoneAimed();
