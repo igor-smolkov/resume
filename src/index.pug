@@ -268,9 +268,9 @@ block variables
     }
 
 block content
-    .card-zone
+    .card-container
       +card({ info: resume, files: sources, rotate: 'left' })
-    .card-zone
+    .card-container
       +card({ info: resume, files: sources, backside: true, rotate: 'right' })
     +edu-list({ info: resume.edu })
     +additional-info({ info: resume.long })

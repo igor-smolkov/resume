@@ -7,6 +7,7 @@ export default class Card {
         this.elementCardBackside = this.elementCard.querySelector('.card__backside');
 
         this.elementCardZone = zone;
+        this.elementCardZone.classList.add('card-zone');
 
         this.width = 600;
         this.height = 333;
@@ -28,6 +29,7 @@ export default class Card {
         
         this.elementCard.addEventListener('pointerdown', (e)=>{this.onCardPointerDown(e)});
         this.elementCard.addEventListener('pointerup', this.onCardPointerUp.bind(this));
+        this.elementCard.addEventListener('pointermove', (e)=>{this.onCardPointerMove(e)});
 
         document.addEventListener('pointermove', (e)=>{this.onDocPointerMove(e)});
         document.addEventListener('pointerup', this.onDocPointerUp.bind(this));
@@ -41,6 +43,8 @@ export default class Card {
 
         document.addEventListener('dragover', (e)=>{this.onDocDragOver(e)}, true);
         document.addEventListener('drop', (e)=>{this.onDocDrop(e)}, true);
+
+        this.elementCard.addEventListener('wheel', (e)=>{this.onCardWheel(e)});
 
         window.addEventListener('resize', (e)=>this.onWinResize(e));
 
@@ -90,11 +94,35 @@ export default class Card {
     onCardPointerUp() {
         this.flipBack();
     }
+    onCardPointerMove(e) {
+        if (e.target.classList.contains('drag-field')) {
+            this.setCardScale(1);
+        }
+    }
     onDocPointerMove(e) {
         this.flipEnd(e);
     }
     onDocPointerUp() {
         this.flipCancel();
+    }
+
+    onCardWheel(e) {
+        e.preventDefault();
+        this.increaseCardScale(e.wheelDelta/1000);
+    }
+    initCardScale() {
+        this.elementCard.style.transform = this.elementCard.style.transform ? this.elementCard.style.transform : 'scale(1)';
+        return /\.*scale\((.*)\)/i;
+    }
+    getCardScale() {
+        return +this.initCardScale().exec(this.elementCard.style.transform)[1];
+    }
+    setCardScale(value) {
+        this.elementCard.style.transform = this.elementCard.style.transform.replace(this.initCardScale(), `scale(${Math.abs(value)}`);
+    }
+    increaseCardScale(delta) {
+        const scale = this.getCardScale();
+        this.elementCard.style.transform = this.elementCard.style.transform.replace(this.initCardScale(), `scale(${Math.abs(scale + delta)})`);
     }
 
     onWinResize(e) {

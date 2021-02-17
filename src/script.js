@@ -5,7 +5,7 @@ import eduList from '@comp/edu-list/edu-list'
 
 const cards = document.querySelectorAll('.card');
 cards.forEach(cardElem => {
-    const cardZoneElem = cardElem.closest('.card-zone');
+    const cardZoneElem = cardElem.closest('.card-container');
     const card = new Card(cardElem, cardZoneElem !== null ? cardZoneElem : undefined);
 });
 
