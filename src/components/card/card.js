@@ -16,7 +16,9 @@ export default class Card {
             cardElem: null,
             cursorShift: {x: null, y: null},
             isEnterZone: false,
+            curDroppable: this.elementCardZone,
         }
+        this.isTouch = false;
 
         this.isFlipping = false;
 
@@ -84,8 +86,10 @@ export default class Card {
 
     onCardPointerDown(e) {
         this.animationAllRemove();
+        this.isTouch = e.pointerType !== 'mouse' ? true : false;
         if (e.target.classList.contains('drag-field')) {
-            this.dragReady(e.target);
+            this.setCardScale(1);
+            this.dragReady(e);
         }
         if (e.target.classList.contains('flip-field') && !e.target.classList.contains('drag-field')) {
             this.flipStart(e.target);
@@ -101,9 +105,16 @@ export default class Card {
     }
     onDocPointerMove(e) {
         this.flipEnd(e);
+        if (this.isTouch) { 
+            this.shiftCard(e);
+            this.cardZoneOver(e);
+        }
     }
     onDocPointerUp() {
         this.flipCancel();
+        if (this.isTouch) { 
+            this.drop();
+        }
     }
 
     onCardWheel(e) {
@@ -197,6 +208,12 @@ export default class Card {
     resetCardDragged() {
         this.elementCard.classList.remove('card_dragged');
     }
+    setCardDragging() {
+        this.elementCard.classList.add('card_dragging');
+    }
+    resetCardDragging() {
+        this.elementCard.classList.remove('card_dragging');
+    }
     setCardZoneAimed() {
         this.elementCardZone.classList.add('card-zone_aimed');
     }
@@ -232,21 +249,33 @@ export default class Card {
         this.elementCardBackside.classList.toggle('card__backside_none');
     }
     backInZone() {
-        this.elementCard.style.left = '0';
-        this.elementCard.style.top = '0';
+        this.elementCard.style.left = 'auto';
+        this.elementCard.style.top = 'auto';
         this.resetCardDragged();
         this.resetCardZoneAbandoned();
     }
 
     //Drag&Drop
-    dragReady() {
+    dragReady(e) {
         if (this.dragging.cardElem === null) {
             this.dragging.cardElem = this.elementCard;
-            this.setCardDraggable();
+            if (!this.isTouch) {
+                this.setCardDraggable();
+                console.log('no-touch');
+            } else {
+                this.setCardDragged();
+                this.setCardDragging();
+                this.cardDragStart(e);
+                this.shiftCard(e);
+                this.setCardZoneAbandoned();
+            }
         }
     }
     onCardDragStart(e) {
         if (this.dragging.cardElem === null) return;
+        this.cardDragStart(e)
+    }
+    cardDragStart(e) {
         this.dragging.isEnterZone = false;
         this.dragging.cursorShift.x = e.clientX - this.dragging.cardElem.offsetLeft + (this.width - this.dragging.cardElem.offsetWidth);
         this.dragging.cursorShift.y = e.clientY - this.dragging.cardElem.offsetTop + (this.height - this.dragging.cardElem.offsetHeight);
@@ -288,18 +317,45 @@ export default class Card {
     }
     drop(e) {
         if (this.dragging.cardElem === null) return;
-        this.resetCardNone();
-        this.setCardAnimationOpacity();
-        if (!this.dragging.isEnterZone) {
-            this.setCardDragged();
-            this.dragging.cardElem.style.left = e.clientX - this.dragging.cursorShift.x + 'px';
-            this.dragging.cardElem.style.top = e.clientY - this.dragging.cursorShift.y + 'px';
+        if (!this.isTouch) {
+            this.resetCardNone();
+            if (!this.dragging.isEnterZone) {
+                this.setCardDragged();
+                this.shiftCard(e);
+            } else {
+                this.backInZone();
+            }
+            this.resetCardDraggable();
         } else {
-            this.backInZone();
+            this.resetCardDragging();
+            if (this.dragging.isEnterZone) {
+                this.backInZone();
+            }
         }
-        this.resetCardDraggable();
+        this.setCardAnimationOpacity();
         this.resetCardZoneAimed();
         this.dragging.cardElem = null;
+        this.dragging.cursorShift.x = null;
+        this.dragging.cursorShift.y = null;
+    }
+    shiftCard(e) {
+        if (this.dragging.cardElem === null) return;
+        this.dragging.cardElem.style.left = e.clientX - this.dragging.cursorShift.x + 'px';
+        this.dragging.cardElem.style.top = e.clientY - this.dragging.cursorShift.y + 'px';
+    }
+    cardZoneOver(e) {
+        if (this.dragging.cardElem === null) return;
+        this.setCardNone();
+        let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
+        this.resetCardNone();
+        if (!elemBelow) return;
+        if (elemBelow.closest('.card-zone') === this.elementCardZone) {
+            this.dragging.isEnterZone = true;
+            this.setCardZoneAimed();
+        } else {
+            this.dragging.isEnterZone = false;
+            this.resetCardZoneAimed();
+        }
     }
 
     //Card flip

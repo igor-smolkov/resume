@@ -12,6 +12,9 @@
         position: absolute;
         z-index: 10;
     }
+    &_dragging {
+        opacity: 0.7;
+    }
     &_none {
         display: none;
     }
