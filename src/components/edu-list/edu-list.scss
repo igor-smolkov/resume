@@ -37,7 +37,7 @@
     min-height: 78px;
     height: 100%;
 
-    // border: 1px solid darkcyan;
+    border: 1px solid #f5f7f1;
     background-color: #f5f7f1;
     border-radius: 2px;
     position: relative;
@@ -107,15 +107,15 @@
         margin: 2px;
         font-size: 11px;
         line-height: 12px;
-        // border: 1px solid rgba(0, 0, 0, 0.13);
+        border: 1px solid #e0e9de;
         background-color: #e0e9de;
         border-radius: 2px;
         &_important {
-            // border: 1px solid darkcyan;
+            border: 1px solid 99b4a4;
             background-color: #99b4a4;
         }
         &_useful {
-            // border: 1px solid rgb(0, 0, 0);
+            border: 1px solid #c5cfc0;
             background-color: #c5cfc0;
         }
     }

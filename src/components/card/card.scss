@@ -80,7 +80,6 @@
     .flip-field {
         position: absolute;
         bottom: 0;
-        border-left: 2px dashed #e0e9de;
         z-index: 0;
         opacity: 1;
         animation: field-opacity 0.5s ease-in-out;
@@ -89,14 +88,14 @@
         right: 0;
         width: 12px;
         height: 100%;
-        border-bottom: none;
-        border-right: none;
+        border-left: 2px dashed #e0e9de;
         cursor: grab;
     }
     .flip-field {
         left: 0;
         height: 6px;
         width: 100%;
+        border-top: 2px dashed #e0e9de;
         cursor: ns-resize;
     }
     @keyframes field-opacity {
@@ -282,7 +281,7 @@
         flex-direction: column;
         &__skill {
             font-size: 12px;
-            line-height: 18px;
+            line-height: 16px;
             padding: 3px 0;
             // border-bottom: 1px solid rgba(0, 139, 139, 0.301);
             border-bottom: 1px solid #c5cfc0;

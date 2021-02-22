@@ -5,4 +5,5 @@ mixin additional-info(props)
     +e.H2.title= 'Также о себе'
     +e.content= info
     +e.extra-ref
-        +b.A.link(href='change/link')= 'ссылка на резюме'
+        SPAN= 'Ссылка на резюме: '
+        +b.A.link(href='https://igor-smolkov.github.io/resume/')= 'https://igor-smolkov.github.io/resume/'
