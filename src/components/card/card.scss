@@ -166,7 +166,7 @@
     }
     .contact-list {
         cursor: auto; 
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         display: flex;
         align-self: center;
         justify-content: flex-end;
@@ -174,26 +174,6 @@
         &__item {
             margin-right: 8px;
             margin-top: 8px;
-            &:nth-child(1) ::before {
-                background: no-repeat center url('./home.png');
-                background-size: 90%;
-            }
-            &:nth-child(2) ::before {
-                background: no-repeat center url('./github.png');
-                background-size: 90%;
-            }
-            &:nth-child(3) ::before {
-                background: no-repeat center url('./telegram.png');
-                background-size: 90%;
-            }
-            &:nth-child(4) ::before {
-                background: no-repeat center url('./phone.png');
-                background-size: 90%;
-            }
-            &:nth-child(5) ::before {
-                background: no-repeat center url('./email.png');
-                background-size: 90%;
-            }
         }
     } 
     .contact {
@@ -202,22 +182,21 @@
         }
         cursor: auto; 
         position: relative;
-        padding-left: 20px;
             
         font-size: 10px;
-        &::before {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        display: flex;
+        &__icon {
             width: 16px;
             height: 16px;
             opacity: 0.9;
+            margin-right: 5px;
         }
-        &:hover::before {
-            opacity: 1;
-            transform: scale(1.3);
+        &:hover {
+            .contact__icon {
+                opacity: 1;
+                transform: scale(1.3);
+            }
         }
         
     }
@@ -248,6 +227,7 @@
         .person {
             order: 3;
             margin-right: 0;
+            padding-top: 0;
             align-self: flex-start;
             &__name {
                 order: 2;
