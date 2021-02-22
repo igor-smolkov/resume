@@ -97,7 +97,8 @@ const plugins = () => {
             filename: output,
             minify: {
                 collapseWhitespace: isProd
-            }
+            },
+            favicon: "./favicon.png"
         })
     }
 
